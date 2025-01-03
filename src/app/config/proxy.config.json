@@ -1,0 +1,12 @@
+{
+  "/api": {
+    "target": "baseUrl",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "/^\/api/": ""
+    }
+  }
+}
+
+
