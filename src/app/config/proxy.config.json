@@ -1,10 +1,10 @@
 {
   "/api": {
-    "target": "baseUrl",
+    "target": "https://api.themoviedb.org/3/trending/all/day",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
-      "/^\/api/": ""
+      "^/api": ""
     }
   }
 }

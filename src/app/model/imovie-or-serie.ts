@@ -2,7 +2,8 @@ export interface IMovieOrSerie {
   adult: boolean;
   backdrop_path: string;
   id: number;
-  title: number;
+  title: string;
+  name: string;
   overview: string;
   poster_path: string;
   media_type: string;
