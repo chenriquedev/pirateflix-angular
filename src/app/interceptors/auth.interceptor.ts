@@ -8,10 +8,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(reqWithHeader).pipe(
     tap((event) => {
-      console.log(event);
+      return event
     }),
     catchError((error: HttpResponse<unknown>) => {
-      console.log(error)
       return of(error);
     })
   );
