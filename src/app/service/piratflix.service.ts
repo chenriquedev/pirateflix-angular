@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { Params } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PiratflixServiceService {
-  private baseUrl = "/api"
-  constructor(private httpClient: HttpClient) { }
+  private baseUrl = '/api';
+  constructor(private httpClient: HttpClient) {}
 
-  get<T>(url: string, params?: Params): Observable<T> {
-    return this.httpClient.get<T>(this.baseUrl + url, {params})
+  get<T>(url: string, params?: Params, baseUrl?: string): Observable<T> {
+    return this.httpClient.get<T>((baseUrl || this.baseUrl) + url, { params });
   }
 }

@@ -15,7 +15,7 @@ export class HomeComponent {
   moviesOrSeries: IMovieOrSerie[] = [];
 
   constructor(private apiService: PiratflixServiceService) {
-    this.apiService.get<IResponse<IMovieOrSerie>>('').subscribe((response) => {
+    this.apiService.get<IResponse<IMovieOrSerie>>('all/day').subscribe((response) => {
       this.moviesOrSeries = response.results;
     });
   }
