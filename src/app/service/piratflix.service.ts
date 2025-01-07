@@ -7,10 +7,10 @@ import { Params } from '@angular/router';
   providedIn: 'root'
 })
 export class PiratflixServiceService {
-  private baseUrl = import.meta.env.NG_APP_BASE_URL
+  private baseUrl = "/api"
   constructor(private httpClient: HttpClient) { }
 
   get<T>(url: string, params?: Params): Observable<T> {
-    return this.httpClient.get<T>(url, {params})
+    return this.httpClient.get<T>(this.baseUrl + url, {params})
   }
 }
