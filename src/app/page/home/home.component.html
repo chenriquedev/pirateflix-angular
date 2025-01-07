@@ -1,1 +1,5 @@
-<p>home works!</p>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 2xl:grid-cols-5">
+  <div *ngFor="let movieOrSerie of moviesOrSeries" >
+    <app-card [movieOrSerie]="movieOrSerie"></app-card>
+  </div>
+</div>
