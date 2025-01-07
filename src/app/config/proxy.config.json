@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://api.themoviedb.org/3/trending/all/day",
+    "target": "https://api.themoviedb.org/3/trending/",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
