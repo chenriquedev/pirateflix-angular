@@ -1,0 +1,14 @@
+
+@media(max-width: 460px) {
+
+  .p-paginator-prev,
+  .p-paginator-next  {
+    display: none;
+  }
+}
+
+button[aria-current] {
+  background: #f8f8ff;
+  color: black;
+  font-weight: 700;
+}
