@@ -1,5 +1,11 @@
 <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 2xl:grid-cols-5">
-  <div *ngFor="let movie of series" >
-    <app-card [movieOrSerie]="movie"></app-card>
+  <div *ngFor="let serie of series">
+    <app-card [movieOrSerie]="serie"></app-card>
   </div>
+</div>
+<div class="mt-6">
+  <app-paginator
+    [pageParams]="pageParam"
+    (changeActualPage)="changePage($event)"
+  ></app-paginator>
 </div>
