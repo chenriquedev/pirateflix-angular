@@ -1,4 +1,10 @@
-import { Component, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { Params } from '../../model/params';
 
@@ -11,20 +17,11 @@ import { Params } from '../../model/params';
 })
 export class PaginatorComponent {
   @Input() pageParams: Params = {};
-  page!: number ;
-  rows!: number ;
-  total_results!: number ;
-  first!: number ;
-
-  ngOnInit() {
-    this.page = this.pageParams.page!,
-    this.rows = this.pageParams.rows!;
-    this.total_results = this.pageParams.total_results!;
-    this.first = (this.page - 1) * this.rows;
-  }
+  @Output() changeActualPage = new EventEmitter<Params>();
 
   onPageChange(event: PaginatorState) {
-    this.page = event.first!;
-    this.rows = event.rows!;
+    this.changeActualPage.emit({
+      page: event.page! + 1,
+    });
   }
 }
