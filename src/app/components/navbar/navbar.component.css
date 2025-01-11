@@ -1,0 +1,31 @@
+.p-menubar-item-content > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  padding: 8px 12px 8px 4px;
+  cursor: pointer;
+}
+
+.p-menubar-item-content p:first-child {
+  color: #a1a1aa;
+}
+
+.p-menubar-item-content p:last-child {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+p-menubarsub {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+
+
+@media(max-width: 960px) {
+  .p-menubar-start {
+    display: none;
+  }
+}
