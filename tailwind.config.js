@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/**/*.{html,ts}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ["Inter"]
+      }
+    },
   },
   plugins: [require('tailwindcss-primeui')],
 }

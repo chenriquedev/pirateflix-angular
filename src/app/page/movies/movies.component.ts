@@ -7,6 +7,7 @@ import { IMovieOrSerie } from '../../model/imovie-or-serie';
 import { PaginatorComponent } from '../../components/paginator/paginator.component';
 import { Params } from '../../model/params';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-movies',
@@ -22,9 +23,10 @@ export class MoviesComponent implements OnInit {
   pageParam: Params = {};
   page!: number;
 
-  fetchData(params?: Params) {
+  fetchData(params?: Params): void {
     this.piratflixService
-      .get<IResponse<IMovieOrSerie>>('/movie/day', { page: params?.page })
+      .get<IResponse<IMovieOrSerie>>('/trending/movie/day', { page: params?.page })
+      .pipe(take(1))
       .subscribe((response) => {
         this.pageParam.page = this.page;
         this.pageParam.first = (this.page - 1) * response.results.length;
@@ -34,7 +36,7 @@ export class MoviesComponent implements OnInit {
       });
   }
 
-  changePage(params: Params) {
+  changePage(params: Params): void {
     this.page = params.page!;
     this.fetchData({ page: params.page });
     this.router.navigate([], {
@@ -44,7 +46,7 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.page = +params.get('page')! || 1;
       this.fetchData({ page: this.page });
