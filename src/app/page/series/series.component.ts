@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
 import { IMovieOrSerie } from '../../model/imovie-or-serie';
 import { PiratflixServiceService } from '../../service/piratflix.service';
@@ -7,6 +7,7 @@ import { IResponse } from '../../model/iresponse';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Params } from '../../model/params';
 import { PaginatorComponent } from '../../components/paginator/paginator.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-series',
@@ -14,7 +15,7 @@ import { PaginatorComponent } from '../../components/paginator/paginator.compone
   templateUrl: './series.component.html',
   styleUrl: './series.component.css',
 })
-export class SeriesComponent {
+export class SeriesComponent implements OnInit {
   series: IMovieOrSerie[] = [];
   route: ActivatedRoute = inject(ActivatedRoute);
   router = inject(Router);
@@ -22,9 +23,10 @@ export class SeriesComponent {
   pageParam: Params = {};
   page!: number;
 
-  fetchData(params?: Params) {
+  fetchData(params?: Params): void {
     this.piratflixService
-      .get<IResponse<IMovieOrSerie>>('/tv/day', { page: params?.page })
+      .get<IResponse<IMovieOrSerie>>('/trending/tv/day', { page: params?.page })
+      .pipe(take(1))
       .subscribe((response) => {
         this.pageParam.page = this.page;
         this.pageParam.first = (this.page - 1) * response.results.length;
@@ -34,7 +36,7 @@ export class SeriesComponent {
       });
   }
 
-  changePage(params: Params) {
+  changePage(params: Params): void {
     this.page = params.page!;
     this.fetchData({ page: params.page });
     this.router.navigate([], {
@@ -44,7 +46,7 @@ export class SeriesComponent {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.page = +params.get('page')! || 1;
       this.fetchData({ page: this.page });

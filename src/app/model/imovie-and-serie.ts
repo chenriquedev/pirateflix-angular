@@ -1,4 +1,4 @@
-export interface IMovie {
+export interface Media {
   adult: boolean;
   backdrop_path: string;
   id: number;
@@ -6,7 +6,12 @@ export interface IMovie {
   poster_path: string;
   release_date: string;
   runtime: number;
+  episode_run_time: number[];
   tagline: string;
   title: string;
-  vote_average: number
+  vote_average: number;
+  first_air_date: string;
+  name: string;
+  status: string;
+  type: string;
 }
