@@ -1,0 +1,8 @@
+<iframe
+*ngIf="videoId"
+  class="w-full h-80 2xl:h-96 mt-3"
+  [attr.src]="safeUrl"
+  title="YouTube video player"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>

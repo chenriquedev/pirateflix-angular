@@ -1,0 +1,35 @@
+<div class="card fixed top-0 w-full">
+  <p-menubar
+    [model]="items"
+    styleClass="!bg-stone-950 rounded-none border-none p-4"
+  >
+    <ng-template #start>
+      <ng-container>
+        <div class="w-12">
+          <a [routerLink]="['']" class="flex items-center">
+            <img [src]="icon" alt="" width="50px">
+            <p class="font-bold">PIRATFLIIX</p>
+          </a>
+        </div>
+      </ng-container>
+    </ng-template>
+    <ng-template #item let-item>
+      <ng-container styleClass="teste">
+        <a [routerLink]="[item.route]">
+          <p [class]="item.icon"></p>
+          <p class="ml-2">{{ item.label }}</p>
+        </a>
+      </ng-container>
+    </ng-template>
+    <ng-template #end>
+      <div class="flex items-center gap-2 mr-4">
+        <a [routerLink]="['/favorites']">
+          <i
+            class="pi pi-heart-fill"
+            style="font-size: 2rem; color: #991b1b"
+          ></i>
+        </a>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

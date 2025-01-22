@@ -1,0 +1,68 @@
+<section
+  class="min-h-screen pt-24 md:pt-28 bg-no-repeat bg-center bg-cover flex flex-col md:items-center 2xl:flex-row 2xl:align-middle 2xl:items-center 2xl:justify-around"
+  [ngStyle]="{
+    'background-image':
+      ' linear-gradient(to right, black, rgba(0, 0, 0, 0.5)),url(' +
+      backdrop_path +
+      ')'
+  }"
+>
+  <div class="p-8 flex flex-col md:flex-row">
+    <article class="max-w-[450px] md:pr-3 2xl:pr-10 2xl:max-w-full">
+      <img [src]="poster_path" alt="" class="w-full rounded-md" />
+    </article>
+    <article class="mt-4">
+      <div class="flex gap-3 align-middle items-center flex-wrap">
+        <h2 class="text-2xl 2xl:text-4xl font-semibold font-inter">
+          {{ mediaContent.title || mediaContent.name }}
+        </h2>
+        <app-rating readonly [activeStars]="activeStars" />
+      </div>
+      <div class="py-2">
+        <span class="font-inter">
+          {{ releaseYear }}
+        </span>
+        <span class="font-inter" *ngIf="runtime"> - {{ runtime }} minutos</span>
+        <span class="font-inter" *ngIf="time_per_episode">
+          - {{ time_per_episode }} minutos por episódio
+        </span>
+      </div>
+      <div class="py-3 max-w-96">
+        <p class="text-xl 2xl:text-2xl font-semibold font-inter">
+          {{ mediaContent.tagline }}
+        </p>
+        <br />
+        <p class="text-base 2xl:text-xl font-light text-justify font-inter">
+          {{ mediaContent.overview }}
+        </p>
+      </div>
+      <div class="py-3">
+        <div *ngIf="!isFavorite; else favorite">
+          <app-button
+            [outlined]="true"
+            [icon]="'pi pi-heart'"
+            [severity]="'contrast'"
+            label="Favoritar"
+            (click)="favoriteMedia()"
+          />
+        </div>
+        <ng-template #favorite>
+          <app-button
+            [outlined]="true"
+            [severity]="'danger'"
+            [icon]="'pi pi-heart-fill'"
+            label="favorito"
+            (click)="unFavoriteMedia()"
+          />
+        </ng-template>
+      </div>
+    </article>
+  </div>
+  <div
+    class="relative w-full pb-8 px-8 flex sm:max-w-[512px] md:mt-5 2xl:mt-0 2xl:max-w-2xl"
+  >
+    <div class="grow">
+      <app-iframe [videoId]="videoKey"></app-iframe>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+<section class="p-8 pt-24 md:pt-28">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 2xl:grid-cols-5">
+    <div *ngFor="let serie of series">
+      <app-card [movieOrSerie]="serie"></app-card>
+    </div>
+  </div>
+  <div class="mt-6">
+    <app-paginator
+      [pageParams]="pageParam"
+      (changeActualPage)="changePage($event)"
+    ></app-paginator>
+  </div>
+</section>

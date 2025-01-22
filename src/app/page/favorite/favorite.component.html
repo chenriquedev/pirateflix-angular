@@ -1,0 +1,25 @@
+<section class="p-8 pt-24 md:pt-28">
+  <div class="pt-2 pb-6 w-auto flex justify-center">
+    <h1 class="font-inter font-bold text-3xl md:text-4xl lg:text-5xl">
+      Meus Favoritos
+    </h1>
+  </div>
+  <div *ngIf="favorites.length > 0; else noFavorites">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 2xl:grid-cols-5">
+      <div *ngFor="let favorite of favorites">
+        <app-card [movieOrSerie]="favorite"></app-card>
+      </div>
+    </div>
+  </div>
+  <ng-template #noFavorites>
+    <div class="w-auto flex flex-col text-center">
+      <p class="font-inter font-medium text-xl mt-5">
+        Opa !!! Parece que você ainda não adicionou nada aos seus favoritos.
+      </p>
+      <p class="font-inter text-[#A1A6B0] text-sm mt-5 md:mt-1">
+        Explore nosso catálogo e marque seus filmes ou séries preferidos para
+        encontrá-los aqui sempre que quiser!
+      </p>
+    </div>
+  </ng-template>
+</section>
