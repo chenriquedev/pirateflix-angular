@@ -108,7 +108,7 @@ export class ViewDetailedComponent implements OnInit {
   }
 
   favoriteMedia() {
-    this.mediaFavorites?.push(this.mediaContent);
+    this.mediaFavorites?.unshift(this.mediaContent);
     this.localStorageService.setItem('fav', this.mediaFavorites);
     this.isFavorite = !this.isFavorite;
   }
