@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Media } from '../../model/imovie-and-serie';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { ButtonComponent } from '../../components/button/button.component';
 import { ViewDetailedService } from './view-detailed.service';
 import { take } from 'rxjs';
 import LocalStorage from '../../utils/localstorage.utils';
+import { ToastService } from '../../service/toast.service';
 
 @Component({
   selector: 'app-view-detailed',
@@ -16,10 +17,11 @@ import LocalStorage from '../../utils/localstorage.utils';
   styleUrls: ['./view-detailed.component.css'],
 })
 export class ViewDetailedComponent implements OnInit {
-  mediaContent: Media = {} as Media;
-  route: ActivatedRoute = inject(ActivatedRoute);
   viewDetailedService: ViewDetailedService = inject(ViewDetailedService);
   localStorageService: LocalStorage<Media[]> = inject(LocalStorage);
+  toastService: ToastService = inject(ToastService);
+  mediaContent: Media = {} as Media;
+  route: ActivatedRoute = inject(ActivatedRoute);
   mediaType!: string;
   mediaId!: string;
   poster_path!: string;
@@ -99,6 +101,7 @@ export class ViewDetailedComponent implements OnInit {
 
   getFavoriteMedia(): void {
     this.mediaFavorites = this.localStorageService.getItem('fav') || [];
+    console.log(this.mediaFavorites);
   }
 
   checkIsFavorite(): void {
@@ -111,13 +114,25 @@ export class ViewDetailedComponent implements OnInit {
     this.mediaFavorites?.unshift(this.mediaContent);
     this.localStorageService.setItem('fav', this.mediaFavorites);
     this.isFavorite = !this.isFavorite;
+    this.toastService.showToast(
+      'success',
+      `Favoritado`,
+      `${this.mediaType === 'tv' ? 'Serie' : 'Filme'} favoritado com sucesso.`
+    );
   }
   unFavoriteMedia() {
-    const removeFavorite = this.mediaFavorites.filter(
+    this.mediaFavorites = this.mediaFavorites.filter(
       (item) => item.id !== this.mediaContent.id
     );
-    this.localStorageService.setItem('fav', removeFavorite);
+    this.localStorageService.setItem('fav', this.mediaFavorites);
     this.toogleFavorite();
+    this.toastService.showToast(
+      'warn',
+      `Desfavoritado`,
+      `${
+        this.mediaType === 'tv' ? 'Serie' : 'Filme'
+      } desfavoritado com sucesso.`
+    );
   }
 
   toogleFavorite(): void {
