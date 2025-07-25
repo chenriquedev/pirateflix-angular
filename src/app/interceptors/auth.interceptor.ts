@@ -5,14 +5,8 @@ import { ToastService } from '../service/toast.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const toastService = inject(ToastService);
-  const reqWithHeader = req.clone({
-    headers: req.headers.set(
-      'Authorization',
-      `Bearer ${import.meta.env.NG_APP_TOKEN}`
-    ),
-  });
 
-  return next(reqWithHeader).pipe(
+  return next(req).pipe(
     tap((event) => {
       return event;
     }),

@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class PiratflixServiceService {
-  private baseUrl = environment.baseUrl;
+  private baseUrl = '/api';
   constructor(private httpClient: HttpClient) {}
 
   get<T>(url: string, params?: Params, baseUrl?: string): Observable<T> {
