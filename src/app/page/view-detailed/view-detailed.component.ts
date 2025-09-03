@@ -101,7 +101,6 @@ export class ViewDetailedComponent implements OnInit {
 
   getFavoriteMedia(): void {
     this.mediaFavorites = this.localStorageService.getItem('fav') || [];
-    console.log(this.mediaFavorites);
   }
 
   checkIsFavorite(): void {
